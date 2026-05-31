@@ -2,7 +2,6 @@
   "welcome": "咒法学",
   "menu": {
     "home": "首页",
-    "pattern": "图案",
     "docs": "文档",
     "download": "下载",
     "tools": "工具"
@@ -57,11 +56,28 @@
     "getPatterns": "获取图案",
     "clearPatterns": "清除图案",
     "settings": "设置",
-    "enableZappy": "启用抖动效果",
+    "copy": "复制图案代码",
+    "export": "导出图案",
+    "patternCount": "图案数量",
+    "pointCount": "总点数",
+    "noPattern": "暂无图案数据",
+    "clickToCopy": "点击复制笔顺",
+    "basicSettings": "基础设置",
+    "pointSize": "点大小",
+    "gridSpacing": "网格间距",
+    "lineWidth": "线条宽度",
+    "colorSettings": "颜色设置",
+    "pointInnerColor": "点内部颜色",
+    "pointOuterColor": "点外部颜色",
+    "lineTailColor": "线条起始颜色",
+    "lineHeadColor": "线条结束颜色",
+    "useGradient": "使用渐变",
+    "renderMode": "渲染模式",
+    "showNearMouse": "显示鼠标附近点",
+    "fadeWithDistance": "距离渐隐",
+    "freePainting": "自由绘画模式",
     "allowOverlap": "允许笔画重叠",
     "dragToDraw": "拖拽绘制模式",
-    "gridSpacing": "网格间距",
-    "patternsList": "图案列表",
-    "pattern": "图案"
+    "enableZappy": "启用抖动效果"
   }
 }

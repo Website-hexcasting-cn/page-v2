@@ -2,7 +2,6 @@
   "welcome": "hexcasting",
   "menu": {
     "home": "Home",
-    "pattern": "Pattern",
     "docs": "Docs",
     "download": "Download",
     "tools": "Tools"
@@ -57,11 +56,28 @@
     "getPatterns": "Get Patterns",
     "clearPatterns": "Clear Patterns",
     "settings": "Settings",
-    "enableZappy": "Enable Zappy Effect",
+    "copy": "Copy Pattern Code",
+    "export": "Export Pattern",
+    "patternCount": "Patterns",
+    "pointCount": "Points",
+    "noPattern": "No pattern data",
+    "clickToCopy": "Click to copy stroke sequence",
+    "basicSettings": "Basic Settings",
+    "pointSize": "Point Size",
+    "gridSpacing": "Grid Spacing",
+    "lineWidth": "Line Width",
+    "colorSettings": "Color Settings",
+    "pointInnerColor": "Point Inner Color",
+    "pointOuterColor": "Point Outer Color",
+    "lineTailColor": "Line Tail Color",
+    "lineHeadColor": "Line Head Color",
+    "useGradient": "Use Gradient",
+    "renderMode": "Render Mode",
+    "showNearMouse": "Show Near Mouse",
+    "fadeWithDistance": "Fade With Distance",
+    "freePainting": "Free Painting",
     "allowOverlap": "Allow Stroke Overlap",
     "dragToDraw": "Drag to Draw Mode",
-    "gridSpacing": "Grid Spacing",
-    "patternsList": "Patterns List",
-    "pattern": "Pattern"
+    "enableZappy": "Enable Zappy Effect"
   }
 }

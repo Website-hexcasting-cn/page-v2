@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount, onDestroy, createEventDispatcher } from 'svelte'
+  import { onMount, onDestroy } from 'svelte'
 
   interface PatternCanvasConfig {
     Point?: {
@@ -32,59 +32,47 @@
     }
   }
 
-  interface PatternCanvasInstance {
-    Function: {
-      SetCanvasWidthAndHeight: (Width?: number, Height?: number) => void
-      Rendering: (HighlightPoint?: { x: number; y: number }) => void
-      GetCanvasElement: () => HTMLCanvasElement
-      SetCanvasElement: (NewCanvasElement: HTMLCanvasElement) => void
-      SetConfig: (NewConfig: PatternCanvasConfig) => void
-      VirtualToReal: (Point: { x: number; y: number }) => { x: number; y: number }
-      RealToVirtual: (RealX: number, RealY: number) => { x: number; y: number }
-      GetGridRange: () => { StartI: number; EndI: number; StartJ: number; EndJ: number }
-      IsAdjacentPoint: (MouseMovePoint: { x: number; y: number }) => boolean
-      IsMouseOverPoint: (e: MouseEvent | TouchEvent) => { x: number; y: number } | null
-      IsStrokeOverlap: (FromPoint: { x: number; y: number }, ToPoint: { x: number; y: number }) => boolean
-      GetHexPath: (FromPoint: { x: number; y: number }, ToPoint: { x: number; y: number }) => { x: number; y: number }[]
-      CalculateRelativeDirectionCode: (FromPoint: { x: number; y: number }, ToPoint: { x: number; y: number }, PreviousDirectionIndex: number) => { DirectionCode: string; CurrentDirectionIndex: number }
-      VirtualToPatternList: () => [number, number, string][]
-      Destroy: () => void
-    }
-    Modifiable: {
-      Config: PatternCanvasConfig
-      VirtualCanvas: { X: number; Y: number; Patterns: { StrokeOrder: { x: number; y: number }[]; StartingPointX: number; StartingPointY: number }[] }
-      Path: { x: number; y: number }[]
-    }
-    ReadOnly: {
-      CanvasElement: HTMLCanvasElement
-    }
-  }
-
   export let config: PatternCanvasConfig = {}
-  export let width: number | undefined = undefined
-  export let height: number | undefined = undefined
-
-  const dispatch = createEventDispatcher()
 
   let canvas: HTMLCanvasElement
-  let instance: PatternCanvasInstance | null = null
-  let CreatePatternCanvas: (canvas: HTMLCanvasElement, config: PatternCanvasConfig) => PatternCanvasInstance
+  let container: HTMLDivElement
+  let instance: any = null
+  let CreatePatternCanvas: any
+  let resizeObserver: ResizeObserver
 
   onMount(async () => {
-    const module = await import('.src/lib/PatternDrawing/PatternDrawing.js')
+    const module = await import('../lib/PatternDrawing/PatternDrawing.js')
     CreatePatternCanvas = module.CreatePatternCanvas
 
-    if (canvas) {
-      instance = CreatePatternCanvas(canvas, config)
-      dispatch('ready', instance)
+    if (canvas && container) {
+      const rect = container.getBoundingClientRect()
+      canvas.width = rect.width
+      canvas.height = rect.height
 
-      if (width !== undefined || height !== undefined) {
-        instance.Function.SetCanvasWidthAndHeight(width, height)
-      }
+      instance = CreatePatternCanvas(canvas, config)
+
+      resizeObserver = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          const width = entry.contentRect.width
+          const height = entry.contentRect.height
+          
+          canvas.width = width
+          canvas.height = height
+          
+          if (instance) {
+            instance.Function.SetCanvasWidthAndHeight(width, height)
+          }
+        }
+      })
+      
+      resizeObserver.observe(container)
     }
   })
 
   onDestroy(() => {
+    if (resizeObserver) {
+      resizeObserver.disconnect()
+    }
     if (instance) {
       instance.Function.Destroy()
     }
@@ -94,11 +82,7 @@
     instance.Function.SetConfig(config)
   }
 
-  $: if (instance && (width !== undefined || height !== undefined)) {
-    instance.Function.SetCanvasWidthAndHeight(width, height)
-  }
-
-  export function getInstance(): PatternCanvasInstance | null {
+  export function getInstance() {
     return instance
   }
 
@@ -118,13 +102,19 @@
   }
 </script>
 
-<canvas bind:this={canvas} class="pattern-canvas"></canvas>
+<div class="canvas-container" bind:this={container}>
+  <canvas bind:this={canvas} class="pattern-canvas"></canvas>
+</div>
 
 <style>
-  .pattern-canvas {
-    display: block;
+  .canvas-container {
     width: 100%;
     height: 100%;
+    overflow: hidden;
+  }
+
+  .pattern-canvas {
+    display: block;
     touch-action: none;
   }
 </style>
