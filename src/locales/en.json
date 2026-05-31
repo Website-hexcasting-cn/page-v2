@@ -3,7 +3,8 @@
   "menu": {
     "home": "Home",
     "docs": "Docs",
-    "download": "Download"
+    "download": "Download",
+    "tools": "Tools"
   },
   "description": [
     "A Turing-complete magic mod",
@@ -31,5 +32,22 @@
     "You call it a spell, the slate calls it the fingerprint of your soul",
     "Let madness be orderly arranged, let the indescribable have perfect geometric shapes",
     "\"Who reflects each other in the mirror, two forgetting one reed for a thousand autumns\""
-  ]
+  ],
+  "tools": {
+    "title": "Tools",
+    "description": "Useful online tools to help you explore hexcasting better",
+    "openLink": "Open Tool",
+    "hexPatternEditor": {
+      "name": "Hex Pattern Editor",
+      "description": "Visual editor for creating and editing hex patterns"
+    },
+    "spellCalculator": {
+      "name": "Spell Calculator",
+      "description": "Calculate spell costs and effects"
+    },
+    "patternVisualizer": {
+      "name": "Pattern Visualizer",
+      "description": "Visualize hex patterns in 3D space"
+    }
+  }
 }

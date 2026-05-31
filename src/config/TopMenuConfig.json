@@ -11,6 +11,11 @@
       "icon": null
     },
     {
+      "id": "tools",
+      "path": "/tools",
+      "icon": null
+    },
+    {
       "id": "download",
       "path": "/download",
       "icon": null

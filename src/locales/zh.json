@@ -3,7 +3,8 @@
   "menu": {
     "home": "首页",
     "docs": "文档",
-    "download": "下载"
+    "download": "下载",
+    "tools": "工具"
   },
   "description": [
     "图灵完备的魔法模组",
@@ -31,5 +32,22 @@
     "你说这是法术，石板却说这是你灵魂的指纹。",
     "让疯狂井然有序地排列，让不可描述之事拥有完美的几何形状",
     "是谁倒映镜中的彼此，两忘一苇千秋"
-  ]
+  ],
+  "tools": {
+    "title": "工具",
+    "description": "实用的在线工具，助你更好地探索咒法学",
+    "openLink": "打开工具",
+    "hexPatternEditor": {
+      "name": "六边形图案编辑器",
+      "description": "可视化创建和编辑六边形图案"
+    },
+    "spellCalculator": {
+      "name": "法术计算器",
+      "description": "计算法术消耗和效果"
+    },
+    "patternVisualizer": {
+      "name": "图案可视化器",
+      "description": "在3D空间中可视化六边形图案"
+    }
+  }
 }

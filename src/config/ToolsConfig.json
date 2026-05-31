@@ -1,0 +1,19 @@
+{
+  "tools": [
+    {
+      "id": "hexPatternEditor",
+      "url": "https://example.com/hex-pattern-editor",
+      "icon": null
+    },
+    {
+      "id": "spellCalculator",
+      "url": "https://example.com/spell-calculator",
+      "icon": null
+    },
+    {
+      "id": "patternVisualizer",
+      "url": "https://example.com/pattern-visualizer",
+      "icon": null
+    }
+  ]
+}
