@@ -1,0 +1,3 @@
+[submodule "src/lib/PatternDrawing"]
+	path = src/lib/PatternDrawing
+	url = ../PatternDrawing

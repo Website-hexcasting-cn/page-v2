@@ -2,6 +2,7 @@
   "welcome": "hexcasting",
   "menu": {
     "home": "Home",
+    "pattern": "Pattern",
     "docs": "Docs",
     "download": "Download",
     "tools": "Tools"
@@ -49,5 +50,18 @@
       "name": "Pattern Visualizer",
       "description": "Visualize hex patterns in 3D space"
     }
+  },
+  "patternCanvas": {
+    "title": "Pattern Drawing",
+    "description": "Draw patterns on hexagonal grid",
+    "getPatterns": "Get Patterns",
+    "clearPatterns": "Clear Patterns",
+    "settings": "Settings",
+    "enableZappy": "Enable Zappy Effect",
+    "allowOverlap": "Allow Stroke Overlap",
+    "dragToDraw": "Drag to Draw Mode",
+    "gridSpacing": "Grid Spacing",
+    "patternsList": "Patterns List",
+    "pattern": "Pattern"
   }
 }

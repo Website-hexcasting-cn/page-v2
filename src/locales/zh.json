@@ -2,6 +2,7 @@
   "welcome": "咒法学",
   "menu": {
     "home": "首页",
+    "pattern": "图案",
     "docs": "文档",
     "download": "下载",
     "tools": "工具"
@@ -49,5 +50,18 @@
       "name": "图案可视化器",
       "description": "在3D空间中可视化六边形图案"
     }
+  },
+  "patternCanvas": {
+    "title": "图案绘制",
+    "description": "在六边形网格上绘制图案",
+    "getPatterns": "获取图案",
+    "clearPatterns": "清除图案",
+    "settings": "设置",
+    "enableZappy": "启用抖动效果",
+    "allowOverlap": "允许笔画重叠",
+    "dragToDraw": "拖拽绘制模式",
+    "gridSpacing": "网格间距",
+    "patternsList": "图案列表",
+    "pattern": "图案"
   }
 }
