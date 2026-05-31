@@ -1,0 +1,19 @@
+{
+  "menu": [
+    {
+      "id": "home",
+      "path": "/",
+      "icon": null
+    },
+    {
+      "id": "docs",
+      "path": "/docs",
+      "icon": null
+    },
+    {
+      "id": "download",
+      "path": "/download",
+      "icon": null
+    }
+  ]
+}
