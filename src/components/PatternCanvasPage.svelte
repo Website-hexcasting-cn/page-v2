@@ -52,9 +52,7 @@
   }
 
   function handleCopy() {
-    if (!patternCode) {
-      updatePatternData()
-    }
+    updatePatternData()
     if (patternCode) {
       navigator.clipboard.writeText(patternCode).then(() => {
         copySuccess = true
@@ -64,9 +62,7 @@
   }
 
   function handleExport() {
-    if (!patternCode) {
-      updatePatternData()
-    }
+    updatePatternData()
     if (patternCode) {
       const blob = new Blob([patternCode], { type: 'text/plain' })
       const url = URL.createObjectURL(blob)
@@ -120,23 +116,23 @@
           <div class="Section">
             <div class="SectionTitle">{$t('patternCanvas.basicSettings')}</div>
             <div class="ControlRow">
-              <label>{$t('patternCanvas.pointSize')}</label>
+              <label for="pointSize">{$t('patternCanvas.pointSize')}</label>
               <div class="InputGroup">
-                <input type="range" min="2" max="20" step="1" bind:value={config.Point.Size} />
+                <input id="pointSize" type="range" min="2" max="20" step="1" bind:value={config.Point.Size} />
                 <input type="number" min="2" max="20" bind:value={config.Point.Size} />
               </div>
             </div>
             <div class="ControlRow">
-              <label>{$t('patternCanvas.gridSpacing')}</label>
+              <label for="gridSpacing">{$t('patternCanvas.gridSpacing')}</label>
               <div class="InputGroup">
-                <input type="range" min="40" max="200" step="10" bind:value={config.Grid.Spacing} />
+                <input id="gridSpacing" type="range" min="40" max="200" step="10" bind:value={config.Grid.Spacing} />
                 <input type="number" min="40" max="200" bind:value={config.Grid.Spacing} />
               </div>
             </div>
             <div class="ControlRow">
-              <label>{$t('patternCanvas.lineWidth')}</label>
+              <label for="lineWidth">{$t('patternCanvas.lineWidth')}</label>
               <div class="InputGroup">
-                <input type="range" min="1" max="20" step="1" bind:value={config.Line.Width} />
+                <input id="lineWidth" type="range" min="1" max="20" step="1" bind:value={config.Line.Width} />
                 <input type="number" min="1" max="20" bind:value={config.Line.Width} />
               </div>
             </div>
@@ -145,20 +141,20 @@
           <div class="Section">
             <div class="SectionTitle">{$t('patternCanvas.colorSettings')}</div>
             <div class="ControlRow">
-              <label>{$t('patternCanvas.pointInnerColor')}</label>
-              <input type="color" bind:value={config.Point.Color} />
+              <label for="pointInnerColor">{$t('patternCanvas.pointInnerColor')}</label>
+              <input id="pointInnerColor" type="color" bind:value={config.Point.Color} />
             </div>
             <div class="ControlRow">
-              <label>{$t('patternCanvas.pointOuterColor')}</label>
-              <input type="color" bind:value={config.Point.MinColor} />
+              <label for="pointOuterColor">{$t('patternCanvas.pointOuterColor')}</label>
+              <input id="pointOuterColor" type="color" bind:value={config.Point.MinColor} />
             </div>
             <div class="ControlRow">
-              <label>{$t('patternCanvas.lineTailColor')}</label>
-              <input type="color" bind:value={config.Line.TailColor} />
+              <label for="lineTailColor">{$t('patternCanvas.lineTailColor')}</label>
+              <input id="lineTailColor" type="color" bind:value={config.Line.TailColor} />
             </div>
             <div class="ControlRow">
-              <label>{$t('patternCanvas.lineHeadColor')}</label>
-              <input type="color" bind:value={config.Line.HeadColor} />
+              <label for="lineHeadColor">{$t('patternCanvas.lineHeadColor')}</label>
+              <input id="lineHeadColor" type="color" bind:value={config.Line.HeadColor} />
             </div>
             <div class="ControlRow Checkbox">
               <label>
@@ -213,27 +209,6 @@
 
     <div class="CanvasContainer">
       <PatternCanvas bind:this={patternCanvasRef} {config} />
-    </div>
-
-    <div class="BottomPanel">
-      <div class="Stats">
-        <div class="StatItem">
-          <span class="StatValue">{patternCount}</span>
-          <span class="StatLabel">{$t('patternCanvas.patternCount')}</span>
-        </div>
-        <div class="StatItem">
-          <span class="StatValue">{pointCount}</span>
-          <span class="StatLabel">{$t('patternCanvas.pointCount')}</span>
-        </div>
-      </div>
-      <div class="PatternCode">
-        {#if patternCode}
-          <code>{patternCode}</code>
-        {:else}
-          <span class="Placeholder">{$t('patternCanvas.noPattern')}</span>
-        {/if}
-      </div>
-      <div class="Hint">{$t('patternCanvas.clickToCopy')}</div>
     </div>
   </div>
 {/if}
@@ -424,70 +399,6 @@
     min-height: 0;
   }
 
-  .BottomPanel {
-    background: rgba(20, 20, 30, 0.95);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 15px 20px;
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    backdrop-filter: blur(10px);
-  }
-
-  .Stats {
-    display: flex;
-    gap: 20px;
-    flex-shrink: 0;
-  }
-
-  .StatItem {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-  }
-
-  .StatValue {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--ThemeColorThree);
-  }
-
-  .StatLabel {
-    font-size: 0.75rem;
-    color: var(--ThemeColorThree);
-    opacity: 0.7;
-  }
-
-  .PatternCode {
-    flex: 1;
-    min-width: 0;
-    padding: 10px 15px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
-    overflow-x: auto;
-    white-space: nowrap;
-  }
-
-  .PatternCode code {
-    font-family: 'Fira Code', 'Consolas', monospace;
-    font-size: 0.9rem;
-    color: var(--ThemeColorThree);
-  }
-
-  .PatternCode .Placeholder {
-    color: var(--ThemeColorThree);
-    opacity: 0.5;
-    font-size: 0.9rem;
-  }
-
-  .Hint {
-    flex-shrink: 0;
-    font-size: 0.85rem;
-    color: var(--ThemeColorThree);
-    opacity: 0.6;
-  }
-
   @media screen and (max-width: 768px) {
     .FloatingToolbar {
       top: 10px;
@@ -506,26 +417,6 @@
       width: calc(100vw - 20px);
       max-width: 320px;
       max-height: calc(100vh - 90px);
-    }
-
-    .BottomPanel {
-      flex-direction: column;
-      gap: 10px;
-      padding: 10px 15px;
-    }
-
-    .Stats {
-      width: 100%;
-      justify-content: center;
-    }
-
-    .PatternCode {
-      width: 100%;
-    }
-
-    .Hint {
-      width: 100%;
-      text-align: center;
     }
   }
 </style>
