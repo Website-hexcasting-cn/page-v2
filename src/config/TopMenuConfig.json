@@ -7,17 +7,12 @@
     },
     {
       "id": "docs",
-      "path": "/docs",
+      "path": "https://hexcasting.hexxy.media/",
       "icon": null
     },
     {
       "id": "tools",
       "path": "/tools",
-      "icon": null
-    },
-    {
-      "id": "download",
-      "path": "/download",
       "icon": null
     }
   ]
