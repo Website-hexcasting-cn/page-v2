@@ -388,7 +388,7 @@
 
   .InputGroup input[type="range"] {
     width: 80px;
-    accent-color: var(--ThemeColorOne);
+    accent-color: var(--ThemeColorTwo);
   }
 
   .InputGroup input[type="number"] {
@@ -450,7 +450,7 @@
   .StatValue {
     font-size: 1.5rem;
     font-weight: bold;
-    color: var(--ThemeColorOne);
+    color: var(--ThemeColorThree);
   }
 
   .StatLabel {

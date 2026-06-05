@@ -266,6 +266,13 @@
     background-color: var(--TopMenuItemHoverColor);
   }
   
+  @media screen and (min-width: 1200px) {
+    .MenuContainer {
+      max-width: 100%;
+      padding: 0 calc(var(--TopMenuHeight) * 0.5);
+    }
+  }
+
   @media screen and (max-width: 768px) {
     .MenuToggle {
       display: block;

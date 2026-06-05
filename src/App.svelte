@@ -36,3 +36,51 @@
     {/if}
   {/if}
 </main>
+
+<style>
+  .IntroductionInformation{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transform: translate(0%, 30vh);
+}
+
+@media screen and (max-width: 767px) {
+  .IntroductionInformation{
+    transform: translate(0, 0);
+  }
+  .IntroductionInformation .Description{
+    display: none;
+  }
+}
+.IntroductionInformation .Title{
+  color: var(--ThemeColorThree);
+}
+.IntroductionInformation .Description{
+  color: var(--ThemeColorThree);
+  text-align: center;
+  padding: 0 20px;
+  margin-top: 20px;
+  font-size: clamp(14px, 2.5vw, 24px);
+  max-width: 80vw;
+}
+.LogoBackgroundImage{
+  width: 80vw;
+  height: auto;
+  aspect-ratio: attr(width) / attr(height);
+}
+
+@media screen and (max-width: 768px) {
+  .IntroductionInformation .LogoBackgroundImage{
+    width: 100vw;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .IntroductionInformation .LogoBackgroundImage{
+    width: auto;
+    max-width: 100%;
+  }
+}
+</style>

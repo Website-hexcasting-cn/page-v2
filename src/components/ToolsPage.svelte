@@ -175,13 +175,13 @@
 
   .OpenLink {
     font-size: 0.9rem;
-    color: var(--ThemeColorOne);
+    color: var(--ThemeColorThree);
     font-weight: 500;
   }
 
   .ExternalIcon {
     font-size: 1.2rem;
-    color: var(--ThemeColorOne);
+    color: var(--ThemeColorThree);
   }
 
   @media screen and (max-width: 768px) {
