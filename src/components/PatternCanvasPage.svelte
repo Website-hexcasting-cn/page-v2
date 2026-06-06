@@ -33,6 +33,7 @@
       FreePainting: false,
       ShowNearMouse: true,
       FadeWithDistance: true,
+      DebugMode: false,
       AllowOverlap: false,
       EnableZappy: false,
       ZappyVariance: 2.5,
