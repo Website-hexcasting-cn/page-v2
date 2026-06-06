@@ -5,7 +5,7 @@
   let showPatternCanvas = false
 
   function openPatternCanvas() {
-    showPatternCanvas = true
+    window.location.href = '/tool/pattern-canvas'
   }
 
   function closePatternCanvas() {

@@ -5,6 +5,7 @@
   import { onMount } from 'svelte'
   import TopMenu from './components/TopMenu.svelte'
   import ToolsPage from './components/ToolsPage.svelte'
+  import PatternCanvasPage from './components/PatternCanvasPage.svelte'
   import './i18n'
   
   let randomDescription = ''
@@ -25,8 +26,10 @@
 <main>
   <TopMenu />
   {#if !$isLoading}
-    {#if currentRoute === '/tools'}
+    {#if currentRoute === '/toollist'}
       <ToolsPage />
+    {:else if currentRoute.startsWith('/tool/')}
+      <PatternCanvasPage />
     {:else}
       <div class="IntroductionInformation">
         <img class="LogoBackgroundImage" src={LogoBackgroundImage} alt="LogoBackgroundImage" />
