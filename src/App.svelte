@@ -20,6 +20,7 @@
     if (Array.isArray(descriptions) && descriptions.length > 0) {
       randomDescription = descriptions[GetRandom(0, descriptions.length - 1)]
     }
+    document.title = $t('title')
   }
 </script>
 
