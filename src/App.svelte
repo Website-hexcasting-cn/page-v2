@@ -37,7 +37,7 @@
         <h1 class="Title">{$t('welcome')}</h1>
         <p class="Description">{randomDescription}</p>
       </div>
-      <a class="AboutLink" href="github.com/Website-hexcasting-cn/page-v2" target="_blank" rel="noopener noreferrer">{$t('about')}</a>
+      <a class="AboutLink" href="https://github.com/Website-hexcasting-cn/page-v2" target="_blank" rel="noopener noreferrer">{$t('about')}</a>
     {/if}
   {/if}
 </main>
