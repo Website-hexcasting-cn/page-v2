@@ -37,6 +37,7 @@
         <h1 class="Title">{$t('welcome')}</h1>
         <p class="Description">{randomDescription}</p>
       </div>
+      <a class="AboutLink" href="github.com/Website-hexcasting-cn/page-v2" target="_blank" rel="noopener noreferrer">{$t('about')}</a>
     {/if}
   {/if}
 </main>
@@ -86,5 +87,19 @@
     width: auto;
     max-width: 100%;
   }
+}
+
+.AboutLink {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: #242424;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.AboutLink:hover {
+  color: var(--ThemeColorThree);
 }
 </style>
