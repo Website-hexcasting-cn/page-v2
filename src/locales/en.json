@@ -81,5 +81,27 @@
     "allowOverlap": "Allow Stroke Overlap",
     "dragToDraw": "Drag to Draw Mode",
     "enableZappy": "Enable Zappy Effect"
+  },
+  "nbtEditor": {
+    "title": "NBT String Editor",
+    "description": "Convert NBT strings to JSON for visual editing, then convert back to NBT strings",
+    "inputSection": "NBT String Input",
+    "jsonSection": "JSON Editor",
+    "outputSection": "NBT String Output",
+    "inputPlaceholder": "Enter NBT string (starts with nbt_)...",
+    "jsonPlaceholder": "JSON format will be displayed here, you can edit it...",
+    "outputPlaceholder": "Converted NBT string will be displayed here...",
+    "convertToJson": "Convert to JSON",
+    "convertToNbt": "Convert to NBT",
+    "converting": "Converting...",
+    "copy": "Copy",
+    "clearAll": "Clear All",
+    "errors": {
+      "emptyInput": "Please enter NBT string",
+      "emptyJson": "JSON editor is empty",
+      "parseError": "Failed to parse NBT string",
+      "jsonParseError": "Invalid JSON format",
+      "copyError": "Failed to copy"
+    }
   }
 }

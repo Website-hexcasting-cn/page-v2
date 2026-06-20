@@ -8,6 +8,10 @@
     window.location.href = '/tool/pattern-canvas'
   }
 
+  function openNbtEditor() {
+    window.location.href = '/tool/nbt-editor'
+  }
+
   function closePatternCanvas() {
     showPatternCanvas = false
   }
@@ -33,6 +37,20 @@
             <h2 class="ToolName">{$t('patternCanvas.title')}</h2>
           </div>
           <p class="ToolDescription">{$t('patternCanvas.description')}</p>
+          <div class="ToolFooter">
+            <span class="OpenLink">{$t('tools.openLink')}</span>
+            <span class="ExternalIcon">→</span>
+          </div>
+        </div>
+
+        <div class="ToolCard NbtToolCard" on:click={openNbtEditor} role="button" tabindex="0" on:keydown={(e) => e.key === 'Enter' && openNbtEditor()}>
+          <div class="ToolCardHeader">
+            <div class="ToolIconPlaceholder">
+              <span class="ToolIconText">📝</span>
+            </div>
+            <h2 class="ToolName">{$t('nbtEditor.title')}</h2>
+          </div>
+          <p class="ToolDescription">{$t('nbtEditor.description')}</p>
           <div class="ToolFooter">
             <span class="OpenLink">{$t('tools.openLink')}</span>
             <span class="ExternalIcon">→</span>
@@ -113,6 +131,11 @@
     border-color: rgba(127, 255, 230, 0.3);
   }
 
+  .NbtToolCard {
+    background: linear-gradient(135deg, rgba(255, 200, 100, 0.1), rgba(200, 150, 255, 0.1));
+    border-color: rgba(255, 200, 100, 0.3);
+  }
+
   .ToolCard:hover {
     background-color: rgba(255, 255, 255, 0.1);
     border-color: var(--ThemeColorOne);
@@ -122,6 +145,10 @@
 
   .PatternToolCard:hover {
     background: linear-gradient(135deg, rgba(127, 255, 230, 0.2), rgba(254, 203, 230, 0.2));
+  }
+
+  .NbtToolCard:hover {
+    background: linear-gradient(135deg, rgba(255, 200, 100, 0.2), rgba(200, 150, 255, 0.2));
   }
 
   .ToolCard:focus {

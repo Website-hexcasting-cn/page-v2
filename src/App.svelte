@@ -6,6 +6,7 @@
   import TopMenu from './components/TopMenu.svelte'
   import ToolsPage from './components/ToolsPage.svelte'
   import PatternCanvasPage from './components/PatternCanvasPage.svelte'
+  import NbtEditor from './components/NbtEditor.svelte'
   import './i18n'
   
   let randomDescription = ''
@@ -29,8 +30,10 @@
   {#if !$isLoading}
     {#if currentRoute === '/toollist'}
       <ToolsPage />
-    {:else if currentRoute.startsWith('/tool/')}
+    {:else if currentRoute === '/tool/pattern-canvas'}
       <PatternCanvasPage />
+    {:else if currentRoute === '/tool/nbt-editor'}
+      <NbtEditor />
     {:else}
       <div class="IntroductionInformation">
         <img class="LogoBackgroundImage" src={LogoBackgroundImage} alt="LogoBackgroundImage" />

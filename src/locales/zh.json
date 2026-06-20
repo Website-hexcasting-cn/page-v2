@@ -81,5 +81,27 @@
     "allowOverlap": "允许笔画重叠",
     "dragToDraw": "拖拽绘制模式",
     "enableZappy": "启用抖动效果"
+  },
+  "nbtEditor": {
+    "title": "NBT 字符串编辑器",
+    "description": "将 NBT 字符串转换为 JSON 格式进行可视化编辑，然后再转回 NBT 字符串",
+    "inputSection": "NBT 字符串输入",
+    "jsonSection": "JSON 编辑器",
+    "outputSection": "NBT 字符串输出",
+    "inputPlaceholder": "请输入 NBT 字符串（以 nbt_ 开头）...",
+    "jsonPlaceholder": "JSON 格式将在此显示，您可以在此编辑...",
+    "outputPlaceholder": "转换后的 NBT 字符串将在此显示...",
+    "convertToJson": "转换为 JSON",
+    "convertToNbt": "转换为 NBT",
+    "converting": "转换中...",
+    "copy": "复制",
+    "clearAll": "清空全部",
+    "errors": {
+      "emptyInput": "请输入 NBT 字符串",
+      "emptyJson": "JSON 编辑器为空",
+      "parseError": "解析 NBT 字符串失败",
+      "jsonParseError": "JSON 格式错误",
+      "copyError": "复制失败"
+    }
   }
 }
