@@ -1,3 +1,6 @@
 [submodule "src/lib/PatternDrawing"]
 	path = src/lib/PatternDrawing
 	url = ../PatternDrawing
+[submodule "src/lib/HexparseNbt-Str"]
+	path = src/lib/HexparseNbt-Str
+	url = https://github.com/Website-hexcasting-cn/HexparseNbt-Str.git
