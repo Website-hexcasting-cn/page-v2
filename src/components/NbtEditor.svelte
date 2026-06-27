@@ -2,9 +2,9 @@
   import { t } from 'svelte-i18n'
   import { nbtStringToJson, jsonToNbtString } from '../lib/HexparseNbt-Str/NBTSTR.js'
   import type { NbtTag } from '../lib/HexparseNbt-Str/NBTSTR.d.ts'
-  import Prism from 'prismjs'
-  import 'prismjs/components/prism-json'
-  import 'prismjs/themes/prism-tomorrow.css'
+  import ErrorMessage from './Nbt/ErrorMessage.svelte'
+  import EditorSection from './Nbt/EditorSection.svelte'
+  import JsonEditor from './Nbt/JsonEditor.svelte'
 
   let nbtInput = ''
   let nbtData: NbtTag | null = null
@@ -13,15 +13,7 @@
   let isConverting = false
   let jsonEditorText = ''
 
-  $: highlightedJson = (() => {
-    const text = jsonEditorText || ''
-    if (!text) return ''
-    try {
-      return Prism.highlight(text, Prism.languages.json, 'json')
-    } catch {
-      return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-    }
-  })()
+  let jsonEditorRef: JsonEditor
 
   async function convertNbtToJson() {
     if (!nbtInput.trim()) {
@@ -78,6 +70,16 @@
     jsonEditorText = ''
     error = ''
   }
+
+  function handleJsonInput(e: InputEvent) {
+    const target = e.target as HTMLTextAreaElement
+    jsonEditorText = target.value
+    try {
+      nbtData = JSON.parse(target.value)
+    } catch {
+      // Invalid JSON, ignore
+    }
+  }
 </script>
 
 <div class="NbtEditor">
@@ -86,19 +88,11 @@
     <p class="EditorDescription">{$t('nbtEditor.description')}</p>
   </div>
 
-  {#if error}
-    <div class="ErrorMessage">
-      <span class="ErrorIcon">⚠️</span>
-      {error}
-    </div>
-  {/if}
+  <ErrorMessage message={error} />
 
   <div class="EditorContainer">
-    <div class="EditorSection">
-      <div class="SectionHeader">
-        <h2 class="SectionTitle">{$t('nbtEditor.inputSection')}</h2>
-        <button class="ClearButton" on:click={clearAll}>{$t('nbtEditor.clearAll')}</button>
-      </div>
+    <EditorSection title={$t('nbtEditor.inputSection')}>
+      <button slot="header" class="ClearButton" on:click={clearAll}>{$t('nbtEditor.clearAll')}</button>
       <textarea
         class="NbtInput"
         bind:value={nbtInput}
@@ -112,34 +106,18 @@
       >
         {isConverting ? $t('nbtEditor.converting') : $t('nbtEditor.convertToJson')}
       </button>
-    </div>
+    </EditorSection>
 
-    <div class="EditorSection">
-      <div class="SectionHeader">
-        <h2 class="SectionTitle">{$t('nbtEditor.jsonSection')}</h2>
-        <button class="CopyButton" on:click={() => copyToClipboard(jsonEditorText)} disabled={!jsonEditorText}>
-          {$t('nbtEditor.copy')}
-        </button>
-      </div>
-      <div class="JsonEditorWrapper">
-        <div class="JsonEditorContent">
-          <pre class="JsonHighlight" aria-hidden="true"><code>{@html highlightedJson}</code></pre>
-          <textarea
-            class="JsonEditor"
-            bind:value={jsonEditorText}
-            on:input={(e) => {
-              const target = e.target as HTMLTextAreaElement
-              try {
-                nbtData = JSON.parse(target.value)
-              } catch {
-                // Invalid JSON, ignore
-              }
-            }}
-            placeholder={$t('nbtEditor.jsonPlaceholder')}
-            spellcheck="false"
-          ></textarea>
-        </div>
-      </div>
+    <EditorSection title={$t('nbtEditor.jsonSection')}>
+      <button slot="header" class="CopyButton" on:click={() => copyToClipboard(jsonEditorText)} disabled={!jsonEditorText}>
+        {$t('nbtEditor.copy')}
+      </button>
+      <JsonEditor
+        bind:this={jsonEditorRef}
+        bind:text={jsonEditorText}
+        on:input={handleJsonInput}
+        placeholder={$t('nbtEditor.jsonPlaceholder')}
+      />
       <button
         class="ConvertButton"
         on:click={convertJsonToNbt}
@@ -147,15 +125,12 @@
       >
         {isConverting ? $t('nbtEditor.converting') : $t('nbtEditor.convertToNbt')}
       </button>
-    </div>
+    </EditorSection>
 
-    <div class="EditorSection">
-      <div class="SectionHeader">
-        <h2 class="SectionTitle">{$t('nbtEditor.outputSection')}</h2>
-        <button class="CopyButton" on:click={() => copyToClipboard(nbtOutput)} disabled={!nbtOutput}>
-          {$t('nbtEditor.copy')}
-        </button>
-      </div>
+    <EditorSection title={$t('nbtEditor.outputSection')}>
+      <button slot="header" class="CopyButton" on:click={() => copyToClipboard(nbtOutput)} disabled={!nbtOutput}>
+        {$t('nbtEditor.copy')}
+      </button>
       <textarea
         class="NbtOutput"
         value={nbtOutput}
@@ -163,7 +138,7 @@
         placeholder={$t('nbtEditor.outputPlaceholder')}
         rows="6"
       ></textarea>
-    </div>
+    </EditorSection>
   </div>
 </div>
 
@@ -191,50 +166,13 @@
     opacity: 0.8;
   }
 
-  .ErrorMessage {
-    background-color: rgba(255, 100, 100, 0.1);
-    border: 1px solid rgba(255, 100, 100, 0.3);
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 20px;
-    color: #ff6b6b;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .ErrorIcon {
-    font-size: 1.2rem;
-  }
-
   .EditorContainer {
     display: flex;
     flex-direction: column;
     gap: 30px;
   }
 
-  .EditorSection {
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 20px;
-  }
-
-  .SectionHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-  }
-
-  .SectionTitle {
-    font-size: 1.3rem;
-    color: var(--ThemeColorThree);
-    margin: 0;
-  }
-
   .NbtInput,
-  .JsonEditor,
   .NbtOutput {
     width: 100%;
     background-color: rgba(0, 0, 0, 0.3);
@@ -252,77 +190,6 @@
   .NbtOutput::placeholder {
     color: white;
     opacity: 0.6;
-  }
-
-  .JsonEditorWrapper {
-    position: relative;
-    width: 100%;
-    height: 450px;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 8px;
-  }
-
-  .JsonEditorWrapper:focus-within {
-    border-color: var(--ThemeColorOne);
-  }
-
-  .JsonEditorContent {
-    position: relative;
-    min-height: 100%;
-  }
-
-  .JsonHighlight {
-    position: relative;
-    width: 100%;
-    margin: 0;
-    padding: 15px;
-    color: white;
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    white-space: pre-wrap;
-    word-break: break-word;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .JsonHighlight code {
-    font-family: inherit;
-    font-size: inherit;
-    background: transparent !important;
-  }
-
-  .JsonEditor {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 15px;
-    background: transparent;
-    color: transparent;
-    caret-color: var(--ThemeColorThree);
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-    font-size: 0.9rem;
-    line-height: 1.5;
-    white-space: pre-wrap;
-    word-break: break-word;
-    border: none;
-    resize: none;
-    outline: none;
-    z-index: 2;
-  }
-
-  .JsonEditor::placeholder {
-    color: white;
-    opacity: 0.6;
-  }
-
-  .JsonEditor::selection {
-    background-color: rgba(100, 150, 255, 0.4);
-    color: white;
   }
 
   .NbtInput:focus,
@@ -396,7 +263,6 @@
     }
 
     .NbtInput,
-    .JsonEditor,
     .NbtOutput {
       font-size: 0.85rem;
       padding: 12px;
